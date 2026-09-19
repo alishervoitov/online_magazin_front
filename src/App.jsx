@@ -34,7 +34,7 @@ function Home() {
             ) : (
                 <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6">
                     {products.map(product => (
-                        <div key={product.id} className="bg-white rounded-xl shadow-md overflow-hidden flex flex-col justify-between hover:shadow-lg transition">
+                        <Link to={`/products/${product.id}`} key={product.id} className="bg-white rounded-xl shadow-md overflow-hidden flex flex-col justify-between hover:shadow-lg transition">
                             <div>
                                 {product.images && product.images.length > 0 ? (
                                     <img
@@ -52,11 +52,11 @@ function Home() {
                             </div>
                             <div className="p-4 pt-0 flex items-center justify-between mt-4">
                                 <span className="text-xl font-bold text-green-600">{product.price} so'm</span>
-                                <button className="bg-blue-600 text-white px-4 py-2 rounded-lg text-sm hover:bg-blue-700 transition">
-                                    Sotib olish
-                                </button>
+                                <span className="bg-blue-600 text-white px-4 py-2 rounded-lg text-sm hover:bg-blue-700 transition">
+        Ko'rish
+      </span>
                             </div>
-                        </div>
+                        </Link>
                     ))}
                 </div>
             )}
