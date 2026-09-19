@@ -1,8 +1,8 @@
-import { Routes, Route } from 'react-router-dom';
-import ProductDetail from './components/ProductDetail';
+import { Routes, Route, Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import API from './services/api';
 import Navbar from './components/Navbar';
+import ProductDetail from './components/ProductDetail';
 
 // Bosh sahifa komponenti
 function Home() {
@@ -54,8 +54,8 @@ function Home() {
                             <div className="p-4 pt-0 flex items-center justify-between mt-4">
                                 <span className="text-xl font-bold text-green-600">{product.price} so'm</span>
                                 <span className="bg-blue-600 text-white px-4 py-2 rounded-lg text-sm hover:bg-blue-700 transition">
-        Ko'rish
-      </span>
+                  Ko'rish
+                </span>
                             </div>
                         </Link>
                     ))}
