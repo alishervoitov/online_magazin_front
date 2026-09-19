@@ -1,4 +1,5 @@
 import { Routes, Route } from 'react-router-dom';
+import ProductDetail from './components/ProductDetail';
 import { useEffect, useState } from 'react';
 import API from './services/api';
 import Navbar from './components/Navbar';
@@ -71,7 +72,7 @@ function App() {
             <Navbar />
             <Routes>
                 <Route path="/" element={<Home />} />
-                {/* Keyinchalik /cart va /login sahifalarini qo'shamiz */}
+                <Route path="/products/:id" element={<ProductDetail />} />
             </Routes>
         </div>
     );
