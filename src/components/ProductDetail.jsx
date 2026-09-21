@@ -3,7 +3,7 @@ import { useParams, Link } from 'react-router-dom';
 import API from '../services/api';
 
 export default function ProductDetail() {
-    const { id } = useParams(); // URL'dan mahsulot ID'sini olamiz
+    const { id } = useParams();
     const [product, setProduct] = useState(null);
     const [loading, setLoading] = useState(true);
 
@@ -18,6 +18,20 @@ export default function ProductDetail() {
                 setLoading(false);
             });
     }, [id]);
+
+    // Savatchaga qo'shish funksiyasi
+    const addToCart = () => {
+        const existingCart = JSON.parse(localStorage.getItem('cart')) || [];
+        const isAlreadyInCart = existingCart.find(item => item.id === product.id);
+
+        if (!isAlreadyInCart) {
+            existingCart.push(product);
+            localStorage.setItem('cart', JSON.stringify(existingCart));
+            alert("Mahsulot savatchaga qo'shildi! 🛒");
+        } else {
+            alert("Bu mahsulot allaqachon savatchada mavjud.");
+        }
+    };
 
     if (loading) {
         return <div className="text-center py-20 text-gray-500 text-lg">Yuklanmoqda...</div>;
@@ -34,7 +48,6 @@ export default function ProductDetail() {
             </Link>
 
             <div className="bg-white rounded-2xl shadow-lg overflow-hidden grid grid-cols-1 md:grid-cols-2 gap-8 p-8">
-                {/* Rasm qismi */}
                 <div>
                     {product.images && product.images.length > 0 ? (
                         <img
@@ -47,7 +60,6 @@ export default function ProductDetail() {
                     )}
                 </div>
 
-                {/* Ma'lumotlar qismi */}
                 <div className="flex flex-col justify-between">
                     <div>
                         <h1 className="text-3xl font-bold text-gray-800 mb-4">{product.title}</h1>
@@ -55,7 +67,10 @@ export default function ProductDetail() {
                         <p className="text-gray-600 leading-relaxed mb-6">{product.description}</p>
                     </div>
 
-                    <button className="bg-blue-600 text-white py-3 px-6 rounded-xl font-medium hover:bg-blue-700 transition shadow-md w-full md:w-auto">
+                    <button
+                        onClick={addToCart}
+                        className="bg-blue-600 text-white py-3 px-6 rounded-xl font-medium hover:bg-blue-700 transition shadow-md w-full md:w-auto"
+                    >
                         Savatchaga qoʻshish 🛒
                     </button>
                 </div>
