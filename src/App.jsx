@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import API from './services/api';
 import Navbar from './components/Navbar';
 import ProductDetail from './components/ProductDetail';
+import Cart from './components/Cart';
 
 function Home() {
     const [products, setProducts] = useState([]);
@@ -71,10 +72,10 @@ function App() {
             <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path="/products/:id" element={<ProductDetail />} />
+                <Route path="/cart" element={<Cart />} /> {/* <-- Yangi yo'l */}
             </Routes>
         </div>
     );
 }
-
 export default App;
 
