@@ -74,7 +74,10 @@ export default function Cart() {
                         <span className="text-green-600">{totalPrice} soʻm</span>
                     </div>
                     <button className="w-full bg-green-600 text-white py-3 rounded-xl font-medium hover:bg-green-700 transition shadow-md">
-                        Buyurtmani rasmiylashtirish
+                        {/* Buyurtma xulosasi qismida */}
+                        <Link to="/checkout" className="block text-center w-full bg-green-600 text-white py-3 rounded-xl font-medium hover:bg-green-700 transition shadow-md">
+                            Buyurtmani rasmiylashtirish
+                        </Link>
                     </button>
                 </div>
             </div>
