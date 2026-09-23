@@ -7,6 +7,7 @@ import Cart from './components/Cart';
 import Login from './components/Login';
 import Register from './components/Register';
 import Checkout from './components/Checkout';
+import Profile from './components/Profile';
 
 function Home() {
     const [products, setProducts] = useState([]);
@@ -79,6 +80,7 @@ function App() {
                 <Route path="/login" element={<Login />} />
                 <Route path="/register" element={<Register />} />
                 <Route path="/checkout" element={<Checkout />} />
+                <Route path="/profile" element={<Profile />} />
             </Routes>
         </div>
     );
