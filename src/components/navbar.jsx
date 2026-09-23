@@ -2,22 +2,20 @@ import { Link, useNavigate } from 'react-router-dom';
 
 export default function Navbar() {
     const navigate = useNavigate();
-    const token = localStorage.getItem('token'); // Token borligini tekshiramiz
+    const token = localStorage.getItem('token');
 
     const handleLogout = () => {
-        localStorage.removeItem('token'); // tokenni o'chiramiz
-        navigate('/login'); // login sahifasiga yo'naltiramiz
+        localStorage.removeItem('token');
+        navigate('/login');
     };
 
     return (
         <nav className="bg-white shadow-md sticky top-0 z-50">
             <div className="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
-                {/* Logo */}
                 <Link to="/" className="text-2xl font-bold text-blue-600">
                     OnlineDoʻkon
                 </Link>
 
-                {/* Menyu havolalari */}
                 <div className="flex items-center space-x-6">
                     <Link to="/" className="text-gray-600 hover:text-blue-600 font-medium transition">
                         Bosh sahifa
@@ -26,7 +24,13 @@ export default function Navbar() {
                         Savatcha 🛒
                     </Link>
 
-                    {/* Token bor-yo'qligiga qarab tugmani o'zgartiramiz */}
+                    {/* Agar foydalanuvchi kirgan bo'lsa Profil havolasini chiqaramiz */}
+                    {token && (
+                        <Link to="/profile" className="text-gray-600 hover:text-blue-600 font-medium transition">
+                            Profil 👤
+                        </Link>
+                    )}
+
                     {token ? (
                         <button
                             onClick={handleLogout}
