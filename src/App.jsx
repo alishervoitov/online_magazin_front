@@ -6,6 +6,7 @@ import ProductDetail from './components/ProductDetail';
 import Cart from './components/Cart';
 import Login from './components/Login';
 import Register from './components/Register';
+import Checkout from './components/Checkout';
 
 function Home() {
     const [products, setProducts] = useState([]);
@@ -74,9 +75,10 @@ function App() {
             <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path="/products/:id" element={<ProductDetail />} />
-                <Route path="/cart" element={<Cart />} /> {/* <-- Yangi yo'l */}
+                <Route path="/cart" element={<Cart />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/register" element={<Register />} />
+                <Route path="/checkout" element={<Checkout />} />
             </Routes>
         </div>
     );
