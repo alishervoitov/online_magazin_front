@@ -6,6 +6,7 @@ export default function Checkout() {
     const [address, setAddress] = useState('');
     const [phone, setPhone] = useState('');
     const [error, setError] = useState('');
+    const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
 
     const handleCheckout = async (e) => {
@@ -17,21 +18,31 @@ export default function Checkout() {
             return;
         }
 
+        setLoading(true);
         try {
-
             const orderData = {
                 address,
                 phone,
-                items: cart.map(item => item.id)
+                items: cart.map(item => ({
+                    product: item.id,
+                    quantity: 1 // Agar savatchada miqdor (quantity) bo'lmasa, har biridan 1 tadan olamiz
+                }))
             };
 
+            // Backendga POST so'rov yuborish
+            await API.post('orders/', orderData, {
+                headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
+            });
 
-            // Hozircha oddiy tozalash va xabar berish:
+            // Savatchani tozalaymiz
             localStorage.removeItem('cart');
             alert('Buyurtmangiz muvaffaqiyatli qabul qilindi! Rahmat.');
-            navigate('/');
+            navigate('/profile'); // Buyurtmalar ko'rinishi uchun profilga o'tkazamiz
         } catch (err) {
+            console.error(err);
             setError('Buyurtma berishda xatolik yuz berdi. Qaytadan urinib koʻring.');
+        } finally {
+            setLoading(false);
         }
     };
 
@@ -65,9 +76,10 @@ export default function Checkout() {
                 </div>
                 <button
                     type="submit"
-                    className="w-full bg-green-600 text-white py-3 rounded-lg hover:bg-green-700 transition font-medium shadow-md"
+                    disabled={loading}
+                    className="w-full bg-green-600 text-white py-3 rounded-lg hover:bg-green-700 transition font-medium shadow-md disabled:opacity-50"
                 >
-                    Buyurtmani tasdiqlash
+                    {loading ? 'Yuborilmoqda...' : 'Buyurtmani tasdiqlash'}
                 </button>
             </form>
         </div>
