@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import API from '../services/api';
-
+import toast from 'react-hot-toast';
 export default function ProductDetail() {
     const { id } = useParams();
     const [product, setProduct] = useState(null);
@@ -20,6 +20,9 @@ export default function ProductDetail() {
     }, [id]);
 
     // Savatchaga qo'shish funksiyasi
+
+
+// ... funksiya ichida ...
     const addToCart = () => {
         const existingCart = JSON.parse(localStorage.getItem('cart')) || [];
         const isAlreadyInCart = existingCart.find(item => item.id === product.id);
@@ -27,9 +30,9 @@ export default function ProductDetail() {
         if (!isAlreadyInCart) {
             existingCart.push(product);
             localStorage.setItem('cart', JSON.stringify(existingCart));
-            alert("Mahsulot savatchaga qo'shildi! 🛒");
+            toast.success("Mahsulot savatchaga qoʻshildi! 🛒"); // <-- Zamonaviy xabar
         } else {
-            alert("Bu mahsulot allaqachon savatchada mavjud.");
+            toast("Bu mahsulot allaqachon savatchada mavjud.", { icon: '⚠️' });
         }
     };
 
